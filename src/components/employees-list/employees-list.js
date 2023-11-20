@@ -8,6 +8,8 @@ const EmployeesList = ({ data }) => {
     return <EmployeesListItem key={id} {...itemProps} />;
   });
 
+  console.log(elements);
+
   return <ul className="app-list list-group">{elements}</ul>;
 };
 
