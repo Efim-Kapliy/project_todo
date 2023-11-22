@@ -12,13 +12,20 @@ class EmployeesAddForm extends Component {
   }
 
   onValueChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+    // Inputs validation
+    if (e.currentTarget.getAttribute("data-input") === "name") {
+      e.target.value = e.target.value.replace(/^[\s\d]/gi, "");
+      e.target.value = e.target.value.replace(/\s+/gi, " ");
+      e.target.value = e.target.value.replace(/[A-Za-zА-яЁё][A-ZА-ЯЁ]/g, (x) => x.toLowerCase());
+      e.target.value = e.target.value.replace(/(\s|^)[a-zа-яё]/g, (x) => x.toUpperCase());
+    }
+
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = (e) => {
     e.preventDefault();
+    if (this.state.name.length < 3 || !this.state.salary) return;
     this.props.onAdd(this.state.name, this.state.salary);
     this.setState({
       name: "",
@@ -40,6 +47,7 @@ class EmployeesAddForm extends Component {
             name="name"
             value={name}
             onChange={this.onValueChange}
+            data-input="name"
           />
           <input
             type="number"
@@ -48,6 +56,7 @@ class EmployeesAddForm extends Component {
             name="salary"
             value={salary}
             onChange={this.onValueChange}
+            data-input="number"
           />
 
           <button type="submit" className="btn btn-outline-light">
