@@ -55,29 +55,25 @@ class App extends Component {
   };
 
   onToggleIncrease = (id) => {
-    this.setState(({ data }) => {
-      return {
-        data: data.map((item) => {
-          if (item.id === id) {
-            return { ...item, increase: !item.increase };
-          }
-          return item;
-        }),
-      };
-    });
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, increase: !item.increase };
+        }
+        return item;
+      }),
+    }));
   };
 
   onToggleRise = (id) => {
-    this.setState(({ data }) => {
-      return {
-        data: data.map((item) => {
-          if (item.id === id) {
-            return { ...item, rise: !item.rise };
-          }
-          return item;
-        }),
-      };
-    });
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, rise: !item.rise };
+        }
+        return item;
+      }),
+    }));
   };
 
   render() {
